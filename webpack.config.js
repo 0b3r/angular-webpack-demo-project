@@ -90,7 +90,7 @@ module.exports = {
     output: params.output,
     module: {
         loaders: [
-            {test: /\.js$/, loader: 'ng-annotate', exclude: /(\.test.js$|node_modules)/},
+            {test: /\.js$/, loader: 'ng-annotate!babel', exclude: /(\.test.js$|node_modules)/},
             {test: /\.css$/, loader: 'style!css'},
             {test: /\.scss$/, loader: 'style!css!sass'},
             {test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)(\?[a-z0-9=\.]+)?$/, loader: 'url?limit=100000' },

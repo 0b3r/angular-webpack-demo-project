@@ -1,3 +1,4 @@
+process.env.BABEL_ENV = 'test'
 var path = require('path');
 var webpackConfig = require('./webpack.config');
 var entry = path.resolve(webpackConfig.entry.bundle);

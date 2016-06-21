@@ -32,6 +32,9 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.4.9",
+    "babel-core": "6.10.4",
+    "babel-loader": "6.2.4",
+    "babel-plugin-__coverage__": "11.0.0",
     "chai": "^3.5.0",
     "chai-angular": "^1.0.3",
     "chai-jquery": "^2.0.0",
