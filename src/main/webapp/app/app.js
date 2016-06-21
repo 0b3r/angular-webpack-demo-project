@@ -6,6 +6,6 @@ module.exports = function(ngModule){
 
 	function AppController(){
 		var vm = this;
-		vm.username = 'Trinity';
+		vm.username = 'Me';
 	}
 }

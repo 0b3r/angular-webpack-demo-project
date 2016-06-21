@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = function(ngModule){
-	
+
 	if(ON_TEST){
-		require('./hello-world.controller.spec');
-		require('./hello-world.directive.spec');
+		require('./hello-world.controller.spec')(ngModule);
+		require('./hello-world.directive.spec')(ngModule);
 	}
 
 	ngModule

@@ -50,7 +50,12 @@ var PARAMS_PER_TARGET = {
             vendor : './src/main/webapp/app/vendor.js'
         },
         debug: true,
-        devtool: 'cheap-module-eval-source-map'
+        devtool: 'cheap-module-eval-source-map',
+        plugins: [
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor'
+            })
+        ]
     },
     PROD: {
         entry: {

@@ -46,6 +46,7 @@
     "karma-chai": "^0.1.0",
     "karma-chai-jquery": "^1.0.0",
     "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.0.0",
     "karma-jquery": "^0.1.0",
     "karma-mocha": "^1.0.1",
     "karma-mocha-reporter": "^2.0.4",

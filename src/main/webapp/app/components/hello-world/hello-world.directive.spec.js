@@ -22,10 +22,13 @@ module.exports = function(ngModule){
             });
 
             it('has expected classes', function(){
-                expect(directive.find('.hello-world')).to.have.length.of(1);
+                var h2El = directive.find('h2');
+                expect(h2El).to.have.class('text-center');
+                expect(angular.element(h2El).text()).to.contain('Hello, Somebody');
+
                 var greeting = directive.find('.greeting');
                 expect(greeting).to.have.length.of(1);
-                expect(greeting).to.have.class('text-center');
+
             });
         });
 
