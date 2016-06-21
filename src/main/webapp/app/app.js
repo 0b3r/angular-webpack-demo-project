@@ -5,7 +5,7 @@ module.exports = function(ngModule){
 		.controller('AppController', [AppController])
 
 	function AppController(){
+		var vm = this;
 		vm.username = 'Trinity';
-
 	}
 }

@@ -6,6 +6,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
+var _TARGET = minimist(process.argv.slice(2)).TARGET || 'BUILD';
+var isTest = _TARGET === 'TEST';
+
 var PARAMS_DEFAULT = {
     resolve: {
         extensions: ['', '.js', '.html']
@@ -19,6 +22,9 @@ var PARAMS_DEFAULT = {
         sourceMapFilename: '[name].map'
     },
     plugins: [
+        new webpack.DefinePlugin({
+            ON_TEST : isTest
+        }),
         new webpack.ProvidePlugin({
             moment: 'moment/moment',
             $: "jquery",
@@ -26,7 +32,7 @@ var PARAMS_DEFAULT = {
             'window.jQuery': 'jquery'
         }),
         new CleanWebpackPlugin(['build/webapp']),
-        
+        // new CopyWebpackPlugin([]),
         new HtmlWebpackPlugin({
             inject: 'head',
             template: './src/main/webapp/index.html'
@@ -37,23 +43,19 @@ var PARAMS_DEFAULT = {
 };
 var PARAMS_PER_TARGET = {
     TEST : {
-        devtool: 'inline-source-map',
-        plugins: [
-            new webpack.DefinePlugin({
-                ON_TEST : true
-            })
-        ]
+        devtool: 'inline-source-map'
     },
     BUILD: {
+        entry: {
+            vendor : './src/main/webapp/app/vendor.js'
+        },
         debug: true,
-        devtool: 'cheap-module-eval-source-map',
-        plugins: [
-            new webpack.DefinePlugin({
-                ON_TEST : false
-            })
-        ]
+        devtool: 'cheap-module-eval-source-map'
     },
-    DIST: {
+    PROD: {
+        entry: {
+            vendor : './src/main/webapp/app/vendor.js'
+        },
         debug: false,
         devtool : 'cheap-module-source-map',
         output : {
@@ -61,21 +63,21 @@ var PARAMS_PER_TARGET = {
             sourceMapFilename: '[name].[chunkhash].map'
         },
         plugins: [
-            new webpack.DefinePlugin({
-                ON_TEST : false
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor'
             }),
             new webpack.optimize.DedupePlugin(),
             new webpack.optimize.UglifyJsPlugin({
                 mangle: false,
                 compress: {
-                    warnings: false
+                    // warnings: false
                 }
             })
         ]
     }
 };
-var TARGET = minimist(process.argv.slice(2)).TARGET || 'BUILD';
-var params = _.mergeWith(PARAMS_DEFAULT, PARAMS_PER_TARGET[TARGET], _mergeArraysCustomizer);
+
+var params = _.mergeWith(PARAMS_DEFAULT, PARAMS_PER_TARGET[_TARGET], _mergeArraysCustomizer);
 
 module.exports = {
     resolve: params.resolve,

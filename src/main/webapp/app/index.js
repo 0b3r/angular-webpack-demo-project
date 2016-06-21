@@ -22,7 +22,7 @@ var components = require('./components')(angular);
 var appModule = angular.module('app', [
     uiRouter,
     ngMaterial,
-    ngCookies,
+    ngMessages,
     components.helloWorld
     ])
 

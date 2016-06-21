@@ -5,12 +5,14 @@
   "description": "Angular Webpack Demo Project",
   "main": "src/main/webapp/app/index.js",
   "scripts": {
-    "start": "webpack-dev-server --TARGET=BUILD --content-base build/webapp",
+    "start": "webpack-dev-server --TARGET=BUILD --content-base src/main/webapp",
+    "dist": "webpack --TARGET=PROD",
+    "test": "karma start --TARGET=TEST",
+    "watch:test": "npm run test -- --auto-watch --no-single-run",
+    "validate": "npm-run-all --parallel lint test",
     "build": "webpack --TARGET=BUILD --display-chunks --display-reasons --display-error-details --display-modules",
-    "dist": "webpack --TARGET=DIST",
-    "karma": "karma start --TARGET=TEST",
-    "lint": "eslint src/main/webapp/app/",
-    "test": "npm run lint && karma start --single-run --TARGET=TEST"
+    "build:prod": "webpack --TARGET=PROD",
+    "lint": "eslint src/main/webapp/app/"
   },
   "dependencies": {
     "angular": "^1.4.9",
@@ -25,7 +27,8 @@
     "d3": "^3.5.17",
     "font-awesome": "^4.5.0",
     "jquery": "^2.1.0",
-    "lodash": "^4.2.0"
+    "lodash": "^4.2.0",
+    "moment": "^2.10.6"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.9",

@@ -28,7 +28,7 @@ module.exports = function(config) {
 
       // Continuous Integration mode
       // if true, Karma captures browsers, runs the tests and exits
-      singleRun: false,
+      singleRun: true,
 
       // enable / disable colors in the output (reporters and logs)
       colors: true,
@@ -53,6 +53,8 @@ module.exports = function(config) {
       // Concurrency level
       // how many browser should be started simultaneous
       concurrency: Infinity,
+
+      webpackMiddleware: {noInfo: true},
 
       // omit plugins to allow automatic inclusion
       // plugins :[]
